@@ -7,30 +7,43 @@ import { getAllCharacters } from "@services/characters";
 
 import FavoriteIcon from "@assets/icons/favorite.svg";
 
-import { Card } from "@/pages/home/components/card";
+import { Card } from "../card";
+import { Pagination } from "../pagination";
 import { Grid, Container, BoxLine, Label, BoxFavorite, Icon } from "./styles";
 
 const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
-  const [caracters, setCaracters] = useState<Array<MarvelCharacter>>([]);
+  const [characters, setCharacters] = useState<Array<MarvelCharacter>>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCharacters, setTotalCharacters] = useState(0);
+  const itemsPerPage = 10;
 
-  const fetchCaracters = async () => {
-    const newCaracters = await getAllCharacters();
+  const fetchCharacters = async (page: number) => {
+    const offset = (page - 1) * itemsPerPage;
+    const response = await getAllCharacters(itemsPerPage, offset);
 
-    setCaracters(newCaracters.data.results);
+    setCharacters(response.data.results);
+    setTotalCharacters(response.data.total);
   };
 
   const handleOnFavorite = (id: number) => {
     console.log(id);
   };
 
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    fetchCharacters(newPage);
+  };
+
   useEffect(() => {
-    fetchCaracters();
-  }, []);
+    fetchCharacters(currentPage);
+  }, [currentPage]);
+
+  const totalPages = Math.ceil(totalCharacters / itemsPerPage);
 
   return (
     <Container data-testid={`${testId}-container`}>
       <BoxLine>
-        <Label>{`Encontrados ${caracters.length} heróis`}</Label>
+        <Label>{`Encontrados ${totalPages} heróis`}</Label>
 
         <BoxFavorite>
           <Icon src={FavoriteIcon} alt="ícone favorito" />
@@ -40,18 +53,24 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
       </BoxLine>
 
       <Grid>
-        {caracters?.map((caracter) => (
+        {characters?.map((character) => (
           <Card
-            key={caracter.id}
-            id={caracter.id}
-            name={caracter.name}
-            description={caracter.description}
+            key={character.id}
+            id={character.id}
+            name={character.name}
+            description={character.description}
             isFavorite={false}
             onFavorite={handleOnFavorite}
-            thumbnail={`${caracter.thumbnail.path}.${caracter.thumbnail.extension}`}
+            thumbnail={`${character.thumbnail.path}.${character.thumbnail.extension}`}
           />
         ))}
       </Grid>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+      />
     </Container>
   );
 };
