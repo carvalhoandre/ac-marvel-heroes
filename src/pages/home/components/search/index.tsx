@@ -10,7 +10,10 @@ import { Input, Container, Image } from "./styles";
 
 const TIME_INTERVAL = 500;
 
-const Search: IComponent<ISearch> = ({ testId = "search-page", onSearch }) => {
+const Search: IComponent<ISearch> = ({
+  testId = "search-component",
+  onSearch,
+}) => {
   const [searchValue, setSearchValue] = useState("");
 
   const debouncedSearchTerm = useDebounce({
@@ -24,12 +27,13 @@ const Search: IComponent<ISearch> = ({ testId = "search-page", onSearch }) => {
 
   return (
     <Container data-testid={`${testId}-container`}>
-      <Image src={SearchIcon} />
+      <Image src={SearchIcon} data-testid={`${testId}-image`} />
 
       <Input
         type="text"
-        onChange={({ target }) => setSearchValue(target.value)}
+        data-testid={`${testId}-input`}
         placeholder="Procure por heróis"
+        onChange={({ target }) => setSearchValue(target.value)}
       />
     </Container>
   );

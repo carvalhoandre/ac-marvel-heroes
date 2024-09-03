@@ -1,6 +1,6 @@
 import IComponent from "src/@types";
 
-import { Header, Search } from "./components";
+import { Header, Search, GridCards } from "./components";
 
 import { Container } from "./styles";
 
@@ -14,6 +14,8 @@ const Home: IComponent = ({ testId = "home-page" }) => {
       <Header />
 
       <Search onSearch={handleOnSearch} />
+
+      <GridCards />
     </Container>
   );
 };

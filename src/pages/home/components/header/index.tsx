@@ -2,7 +2,7 @@ import IComponent from "src/@types";
 
 import { Title, SubTitle, Container } from "./styles";
 
-const Header: IComponent = ({ testId = "header-page" }) => {
+const Header: IComponent = ({ testId = "header-component" }) => {
   return (
     <Container data-testid={`${testId}-container`}>
       <Title data-testid={`${testId}-title`}>
