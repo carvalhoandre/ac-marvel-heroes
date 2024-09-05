@@ -57,7 +57,7 @@ const Pagination: IComponent<IPage> = ({
         disabled={currentPage === 1}
         data-testid={`${testId}-prev-button`}
       >
-        <img src={LeftArrowIcon} alt="Previous Page" />
+        <img src={LeftArrowIcon} alt="página anterior" />
       </PaginationArrowButton>
 
       {pagesToShow.map((page, index) => (
@@ -80,7 +80,7 @@ const Pagination: IComponent<IPage> = ({
         disabled={currentPage === totalPages}
         data-testid={`${testId}-next-button`}
       >
-        <img src={RightArrowIcon} alt="Next Page" />
+        <img src={RightArrowIcon} alt="próxima página" />
       </PaginationArrowButton>
     </PaginationWrapper>
   );

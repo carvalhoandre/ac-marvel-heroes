@@ -1,9 +1,5 @@
-export interface ICard {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: string;
-  isFavorite: boolean;
+import { MarvelCharacter } from "src/@types/character";
 
-  onFavorite: (id: number) => void;
+export interface ICard {
+  character: MarvelCharacter;
 }

@@ -3,39 +3,35 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  padding: 19px 17px;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #c6c6c6;
+  padding: 16px;
+  gap: 10px;
   width: 100%;
-`;
+  max-width: 400px;
 
-export const BoxLine = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+  @media (min-width: 768px) {
+    max-width: 300px;
+  }
 
-export const Title = styled.h1`
-  color: #212121;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: left;
-`;
-
-export const Paragraph = styled.p`
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 18.75px;
-  text-align: left;
-  color: #212121;
+  @media (min-width: 1024px) {
+    max-width: 250px;
+  }
 `;
 
 export const Image = styled.img`
   width: 100%;
   height: auto;
   border-radius: 8px;
+
+  @media (min-width: 768px) {
+    height: 250px;
+  }
+
+  @media (min-width: 1024px) {
+    height: 200px;
+  }
 `;
 
 export const FallbackImage = styled.div`
@@ -49,10 +45,69 @@ export const FallbackImage = styled.div`
   width: 100%;
   height: 200px;
   border-radius: 8px;
+
+  @media (min-width: 768px) {
+    height: 250px;
+  }
+
+  @media (min-width: 1024px) {
+    height: 200px;
+  }
+`;
+
+export const BoxLine = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+export const Title = styled.h2`
+  font-size: 1.25rem;
+  color: #333;
+  margin: 0;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.25rem;
+  }
+`;
+
+export const Paragraph = styled.p`
+  font-size: 0.875rem;
+  color: #777;
+  margin: 0;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const Icon = styled.img`
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+
+  @media (min-width: 768px) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 `;
