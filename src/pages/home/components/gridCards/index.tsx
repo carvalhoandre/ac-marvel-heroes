@@ -43,6 +43,7 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
     setCharacters,
     setCurrentPage,
     toggleFavorites,
+    setselectedCharacter,
   } = useCharacterStore();
 
   const currentFavorites: Array<MarvelCharacter> =
@@ -140,7 +141,8 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
                   key={character.id}
                   character={character}
                   isFavorite={isFavorite}
-                  onClick={handleToggleFavorite}
+                  onClick={setselectedCharacter}
+                  onFavoriteClick={handleToggleFavorite}
                 />
               );
             })}

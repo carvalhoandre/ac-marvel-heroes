@@ -10,6 +10,11 @@ export const Container = styled.div`
   gap: 10px;
   width: 100%;
   height: 100%;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Image = styled.img`
