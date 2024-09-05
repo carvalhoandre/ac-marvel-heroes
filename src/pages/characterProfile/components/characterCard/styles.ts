@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CharacterCardContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 70px;
   background: white;
   border-radius: 20px;
   padding: 20px;
@@ -23,14 +23,17 @@ export const CharacterInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 22px;
 
   h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212121;
     margin: 0;
   }
 
   p {
     font-size: 1rem;
-    color: #666;
+    color: #212121;
   }
 `;
