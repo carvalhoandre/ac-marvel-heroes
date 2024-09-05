@@ -9,15 +9,7 @@ export const Container = styled.div`
   padding: 16px;
   gap: 10px;
   width: 100%;
-  max-width: 400px;
-
-  @media (min-width: 768px) {
-    max-width: 300px;
-  }
-
-  @media (min-width: 1024px) {
-    max-width: 250px;
-  }
+  height: 100%;
 `;
 
 export const Image = styled.img`

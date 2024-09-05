@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-
 import IComponent from "src/@types";
 import { MarvelCharacter } from "src/@types/character";
 
+import { useCharacterStore } from "@store/characters";
 import { useLoggedUserStore } from "@store/favoritesCharacters";
 
 import { getAllCharacters } from "@services/characters";
@@ -11,70 +10,151 @@ import FavoriteIcon from "@assets/icons/favorite.svg";
 import FavoriteOutlinedIcon from "@assets/icons/favorite-outlined.svg";
 
 import { Card } from "../card";
+import { Search } from "../search";
 import { Pagination } from "../pagination";
-import { Grid, Container, BoxLine, Label, BoxFavorite, Icon } from "./styles";
+
+import {
+  Grid,
+  Container,
+  BoxLine,
+  Label,
+  BoxFavorite,
+  Icon,
+  EmptyLabel,
+} from "./styles";
+
+const ITEMS_POR_PAGE = 8;
 
 const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
-  const favoritesCharacters = useLoggedUserStore(
-    ({ favoritesCharacters }) => favoritesCharacters
-  );
+  const {
+    favoritesCharacters,
+    favoritesSearch,
+    setFavoritesSearch,
+    toggleFavoriteCharacter,
+  } = useLoggedUserStore();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalCharacters, setTotalCharacters] = useState(0);
-  const [showFavorites, setShowFavorites] = useState(false);
-  const [characters, setCharacters] = useState<Array<MarvelCharacter>>([]);
+  const {
+    characters,
+    totalCharacters,
+    currentPage,
+    search,
+    showFavorites,
+    setSearch,
+    setCharacters,
+    setCurrentPage,
+    toggleFavorites,
+  } = useCharacterStore();
 
-  const itemsPerPage = 10;
+  const currentFavorites: Array<MarvelCharacter> =
+    favoritesSearch.length > 0 ? favoritesSearch : favoritesCharacters;
 
-  const totalPages = Math.ceil(totalCharacters / itemsPerPage);
+  const currentCharacters: Array<MarvelCharacter> = showFavorites
+    ? currentFavorites
+    : characters;
 
-  const currentCharacters = showFavorites ? favoritesCharacters : characters;
+  const fetchCharacters = async (page: number, searchQuery = "") => {
+    if (showFavorites) return;
 
-  const fetchCharacters = async (page: number) => {
-    const offset = (page - 1) * itemsPerPage;
-    const response = await getAllCharacters(itemsPerPage, offset);
+    const offset = (page - 1) * ITEMS_POR_PAGE;
 
-    setCharacters(response.data.results);
-    setTotalCharacters(response.data.total);
+    const response = await getAllCharacters(
+      ITEMS_POR_PAGE,
+      offset,
+      searchQuery
+    );
+
+    setCharacters(response.data.results, response.data.total);
   };
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
-    fetchCharacters(newPage);
+    fetchCharacters(newPage, search);
   };
 
-  useEffect(() => {
-    fetchCharacters(currentPage);
-  }, [currentPage]);
+  const handleSearchChange = (currentSearch: string) => {
+    setSearch(currentSearch);
+
+    if (showFavorites) {
+      const filteredFavorites = favoritesCharacters.filter((character) =>
+        character.name.toLowerCase().includes(currentSearch.toLowerCase())
+      );
+
+      setFavoritesSearch(filteredFavorites);
+    } else {
+      fetchCharacters(1, currentSearch);
+    }
+  };
+
+  const handleToggleFavorite = (character: MarvelCharacter) => {
+    toggleFavoriteCharacter(character);
+
+    const filteredFavorites = favoritesCharacters.filter(
+      (currentCharacter) => currentCharacter.id !== character.id
+    );
+
+    setFavoritesSearch(filteredFavorites);
+  };
+
+  const handleToggleFavorites = () => {
+    toggleFavorites();
+
+    if (!showFavorites && characters.length === 0) {
+      fetchCharacters(currentPage, search);
+    }
+  };
 
   return (
     <Container data-testid={`${testId}-container`}>
+      <Search onSearch={handleSearchChange} testId={`${testId}-search-input`} />
+
       <BoxLine>
-        <Label>{`Encontrados ${totalPages} heróis`}</Label>
+        <Label>
+          {`Encontrados ${
+            showFavorites ? currentFavorites.length : totalCharacters
+          } heróis`}
+        </Label>
 
         {favoritesCharacters.length > 0 && (
-          <BoxFavorite onClick={() => setShowFavorites((state) => !state)}>
+          <BoxFavorite onClick={handleToggleFavorites}>
             <Icon
               src={showFavorites ? FavoriteIcon : FavoriteOutlinedIcon}
               alt="ícone favorito"
             />
-
             <Label isFavorite>Somente favoritos</Label>
           </BoxFavorite>
         )}
       </BoxLine>
 
-      <Grid>
-        {currentCharacters?.map((character) => (
-          <Card key={character.id} character={character} />
-        ))}
-      </Grid>
+      {currentCharacters.length === 0 ? (
+        <EmptyLabel>Sem heróis encontrados</EmptyLabel>
+      ) : (
+        <>
+          <Grid>
+            {currentCharacters.map((character) => {
+              const isFavorite = favoritesCharacters.some(
+                (favorite) => favorite.id === character.id
+              );
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePageChange={handlePageChange}
-      />
+              return (
+                <Card
+                  key={character.id}
+                  character={character}
+                  isFavorite={isFavorite}
+                  onClick={handleToggleFavorite}
+                />
+              );
+            })}
+          </Grid>
+
+          {!showFavorites && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(totalCharacters / ITEMS_POR_PAGE)}
+              handlePageChange={handlePageChange}
+            />
+          )}
+        </>
+      )}
     </Container>
   );
 };

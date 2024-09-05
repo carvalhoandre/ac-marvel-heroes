@@ -10,6 +10,7 @@ export const Container = styled.div`
   border-radius: 100px;
   background-color: #f99a9933;
   box-sizing: border-box;
+  margin: auto;
 
   @media (max-width: 768px) {
     padding: 12px 16px;

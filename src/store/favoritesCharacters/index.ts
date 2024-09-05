@@ -8,6 +8,7 @@ export const useLoggedUserStore = create<FavoritesCharactersStore>()(
   persist(
     (set, get) => ({
       favoritesCharacters: [],
+      favoritesSearch: [],
 
       toggleFavoriteCharacter: (newCharacter: MarvelCharacter) => {
         const currentFavorites = get().favoritesCharacters;
@@ -26,9 +27,21 @@ export const useLoggedUserStore = create<FavoritesCharactersStore>()(
           favoritesCharacters: updatedFavorites,
         });
       },
+
+      setFavoritesSearch: (filteredFavorites: Array<MarvelCharacter>) => {
+        set({ favoritesSearch: filteredFavorites });
+      },
+
+      getFilteredFavorites: () => {
+        const { favoritesSearch } = get();
+        return favoritesSearch;
+      },
     }),
     {
       name: "character-favorite-storage",
+      partialize: (state) => ({
+        favoritesCharacters: state.favoritesCharacters,
+      }),
     }
   )
 );

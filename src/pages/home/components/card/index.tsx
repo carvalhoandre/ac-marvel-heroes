@@ -1,8 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
+import { ICard } from "./types";
 import IComponent from "src/@types";
-
-import { useLoggedUserStore } from "@store/favoritesCharacters";
 
 import FavoriteIcon from "@assets/icons/favorite.svg";
 import FavoriteOutlinedIcon from "@assets/icons/favorite-outlined.svg";
@@ -16,34 +15,18 @@ import {
   Icon,
   FallbackImage,
 } from "./styles";
-import { ICard } from "./types";
 
-const Card: IComponent<ICard> = ({ testId = "card-component", character }) => {
-  const [favoritesCharacters, toggleFavoriteCharacter] = useLoggedUserStore(
-    ({ favoritesCharacters, toggleFavoriteCharacter }) => [
-      favoritesCharacters,
-      toggleFavoriteCharacter,
-    ]
-  );
-
-  const [isToggling, setIsToggling] = useState(false);
+const Card: IComponent<ICard> = ({
+  testId = "card-component",
+  character,
+  isFavorite,
+  onClick,
+}) => {
   const [isImageBroken, setIsImageBroken] = useState(false);
 
   const thumbnail = `${character.thumbnail.path}.${character.thumbnail.extension}`;
 
-  const isFavorite = favoritesCharacters.some(
-    (favorite) => favorite.id === character.id
-  );
-
   const handleError = () => setIsImageBroken(true);
-
-  const handleToggleFavorite = useCallback(() => {
-    if (!isToggling) {
-      setIsToggling(true);
-      toggleFavoriteCharacter(character);
-      setTimeout(() => setIsToggling(false), 300);
-    }
-  }, [isToggling, toggleFavoriteCharacter, character]);
 
   return (
     <Container data-testid={`${testId}-container`}>
@@ -64,7 +47,7 @@ const Card: IComponent<ICard> = ({ testId = "card-component", character }) => {
         <Title data-testid={`${testId}-title`}>{character.name}</Title>
 
         <Icon
-          onClick={handleToggleFavorite}
+          onClick={() => onClick(character)}
           data-testid={`${testId}-icon`}
           src={isFavorite ? FavoriteIcon : FavoriteOutlinedIcon}
           alt="ícone favorito"

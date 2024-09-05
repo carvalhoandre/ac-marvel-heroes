@@ -45,21 +45,27 @@ export const Grid = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 25px;
   }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-  }
 `;
 
 export const Label = styled.p<LabelProps>`
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 500;
   text-align: left;
   color: ${({ isFavorite }) => (isFavorite ? "#F43735B2" : "#c5c5c5")};
 
   @media (min-width: 768px) {
     font-size: 1.5rem;
+  }
+`;
+
+export const EmptyLabel = styled.p<LabelProps>`
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: #21212199;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
   }
 `;
 
@@ -70,10 +76,5 @@ export const Icon = styled.img`
   @media (min-width: 768px) {
     width: 1.5rem;
     height: 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    width: 2rem;
-    height: 2rem;
   }
 `;
