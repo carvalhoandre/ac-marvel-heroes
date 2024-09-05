@@ -1,6 +1,9 @@
 import IComponent from "src/@types";
 import { IComicCard } from "./types";
 
+import { formatDate } from "@helpers/date";
+import { truncateString } from "@helpers/string";
+
 import { ComicCardContainer, ComicImage, ComicInfo } from "./styles";
 
 const ComicCard: IComponent<IComicCard> = ({
@@ -20,11 +23,13 @@ const ComicCard: IComponent<IComicCard> = ({
           <h3 data-testid={`${testId}-title`}>{title}</h3>
 
           <div className="meta" data-testid={`${testId}-meta`}>
-            {date} - {pages} pages
+            {formatDate(date)} - {pages} pages
           </div>
         </div>
 
-        <p data-testid={`${testId}-description`}>{description}</p>
+        <p data-testid={`${testId}-description`}>
+          {truncateString(description, 200)}
+        </p>
       </ComicInfo>
     </ComicCardContainer>
   );

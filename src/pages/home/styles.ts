@@ -6,6 +6,7 @@ export const Container = styled.div`
   gap: 110px;
   padding: 80px 40px;
   align-items: center;
+  background-color: #f5f5f5;
 
   @media (max-width: 1024px) {
     gap: 80px;

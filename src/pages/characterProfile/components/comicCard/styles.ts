@@ -5,24 +5,26 @@ export const ComicCardContainer = styled.div`
   gap: 20px;
   background: white;
   border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  margin: 0px auto;
   width: 80%;
   max-width: 900px;
 `;
 
 export const ComicImage = styled.img`
-  width: 100px;
-  height: 150px;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 0 0 20px;
+  max-width: 200px;
+  max-height: 2200px;
   object-fit: cover;
 `;
 
 export const ComicInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  padding: 18px 23px;
+  gap: 20px;
 
   h3 {
     font-size: 1.5rem;
@@ -37,5 +39,6 @@ export const ComicInfo = styled.div`
   p {
     font-size: 1rem;
     color: #666;
+    margin-top: 16px;
   }
 `;

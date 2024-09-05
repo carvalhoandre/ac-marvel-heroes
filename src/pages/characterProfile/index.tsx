@@ -1,21 +1,38 @@
+import { useEffect, useState } from "react";
+
 import IComponent from "src/@types";
+import { Comic } from "src/@types/comics";
 
 import { useCharacterStore } from "@store/characters";
 
-import { HeroBanner, CharacterCard } from "./components";
-import { Container } from "./styles";
+import { getComicsByCharacter } from "@services/characters";
+
+import { HeroBanner, CharacterCard, ComicCard } from "./components";
+import { ComicsContainer } from "./styles";
 
 const CharacterProfile: IComponent = ({
   testId = "character-profile-page",
 }) => {
   const { selectedCharacter } = useCharacterStore();
 
+  const [comics, setComics] = useState<Array<Comic>>([]);
+
   if (!selectedCharacter) return <></>;
 
   const imageUrl = `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`;
 
+  const handleFetchComics = async () => {
+    const newComicsResponse = await getComicsByCharacter(selectedCharacter.id);
+
+    setComics(newComicsResponse.data.results);
+  };
+
+  useEffect(() => {
+    handleFetchComics();
+  }, []);
+
   return (
-    <Container data-testid={`${testId}-container`}>
+    <div data-testid={`${testId}-container`}>
       <HeroBanner />
 
       <CharacterCard
@@ -23,7 +40,19 @@ const CharacterProfile: IComponent = ({
         description={selectedCharacter.description}
         imageUrl={imageUrl}
       />
-    </Container>
+
+      <ComicsContainer>
+        {comics.map((comic) => (
+          <ComicCard
+            title={comic.title}
+            description={comic.description}
+            date={comic.dates[0].date}
+            imageUrl={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+            pages={comic.pageCount}
+          />
+        ))}
+      </ComicsContainer>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { FooterContainer, Typography, Inline } from "./styles";
 const Footer: IComponent = ({ testId = "footer-component" }) => {
   return (
     <FooterContainer data-testid={`${testId}-container`}>
-      <Typography>Data provided by Marvel. © 2023 MARVEL</Typography>
+      <Typography>Data provided by Marvel. © 2024 MARVEL</Typography>
 
       <Inline>
         <Typography>Desenvolvido por</Typography>
