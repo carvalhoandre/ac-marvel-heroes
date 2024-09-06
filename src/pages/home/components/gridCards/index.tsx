@@ -6,6 +6,8 @@ import { useLoggedUserStore } from "@store/favoritesCharacters";
 
 import { getAllCharacters } from "@services/characters";
 
+import { getItemsPerPage } from "@helpers/innerWidth";
+
 import FavoriteIcon from "@assets/icons/favorite.svg";
 import FavoriteOutlinedIcon from "@assets/icons/favorite-outlined.svg";
 
@@ -16,8 +18,6 @@ import { Search } from "../search";
 import { Pagination } from "../pagination";
 
 import { Grid, Container, BoxLine, Label, BoxFavorite, Icon } from "./styles";
-
-const ITEMS_POR_PAGE = 8;
 
 const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
   const {
@@ -40,6 +40,8 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
     setselectedCharacter,
   } = useCharacterStore();
 
+  const itemsPorPage = getItemsPerPage();
+
   const currentFavorites: Array<MarvelCharacter> =
     favoritesSearch.length > 0 ? favoritesSearch : favoritesCharacters;
 
@@ -50,13 +52,9 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
   const fetchCharacters = async (page: number, searchQuery = "") => {
     if (showFavorites) return;
 
-    const offset = (page - 1) * ITEMS_POR_PAGE;
+    const offset = (page - 1) * itemsPorPage;
 
-    const response = await getAllCharacters(
-      ITEMS_POR_PAGE,
-      offset,
-      searchQuery
-    );
+    const response = await getAllCharacters(itemsPorPage, offset, searchQuery);
 
     setCharacters(response.data.results, response.data.total);
   };
@@ -143,7 +141,7 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
           {!showFavorites && (
             <Pagination
               currentPage={currentPage}
-              totalPages={Math.ceil(totalCharacters / ITEMS_POR_PAGE)}
+              totalPages={Math.ceil(totalCharacters / itemsPorPage)}
               handlePageChange={handlePageChange}
             />
           )}
