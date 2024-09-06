@@ -9,19 +9,13 @@ import { getAllCharacters } from "@services/characters";
 import FavoriteIcon from "@assets/icons/favorite.svg";
 import FavoriteOutlinedIcon from "@assets/icons/favorite-outlined.svg";
 
+import { Loading } from "@components/loading";
+
 import { Card } from "../card";
 import { Search } from "../search";
 import { Pagination } from "../pagination";
 
-import {
-  Grid,
-  Container,
-  BoxLine,
-  Label,
-  BoxFavorite,
-  Icon,
-  EmptyLabel,
-} from "./styles";
+import { Grid, Container, BoxLine, Label, BoxFavorite, Icon } from "./styles";
 
 const ITEMS_POR_PAGE = 8;
 
@@ -126,9 +120,7 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
         )}
       </BoxLine>
 
-      {currentCharacters.length === 0 ? (
-        <EmptyLabel>Sem heróis encontrados</EmptyLabel>
-      ) : (
+      {currentCharacters.length > 0 ? (
         <>
           <Grid>
             {currentCharacters.map((character) => {
@@ -156,6 +148,8 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
             />
           )}
         </>
+      ) : (
+        <Loading />
       )}
     </Container>
   );

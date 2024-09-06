@@ -12,8 +12,22 @@ export const HeroBannerContainer = styled.div`
   text-align: center;
   padding: 0 20px;
 
+  @media (max-width: 1024px) {
+    height: 350px;
+  }
+
+  @media (max-width: 768px) {
+    height: 300px;
+    padding: 0 15px;
+  }
+
+  @media (max-width: 480px) {
+    height: 250px;
+    padding: 0 10px;
+  }
+
   div {
-    margin: 0px auto 0px auto;
+    margin: 0 auto;
     width: 80%;
     max-width: 900px;
   }
@@ -25,5 +39,20 @@ export const HeroBannerContainer = styled.div`
     line-height: 1.2;
     max-width: 400px;
     text-align: left;
+
+    @media (max-width: 1024px) {
+      font-size: 2.2rem;
+      max-width: 350px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      max-width: 300px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.8rem;
+      max-width: 250px;
+    }
   }
 `;

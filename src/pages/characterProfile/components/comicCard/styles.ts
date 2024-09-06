@@ -9,6 +9,15 @@ export const ComicCardContainer = styled.div`
   margin: 0px auto;
   width: 80%;
   max-width: 900px;
+
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack items vertically on tablets
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%; // Further reduce width on mobile
+  }
 `;
 
 export const ComicImage = styled.img`
@@ -18,6 +27,15 @@ export const ComicImage = styled.img`
   max-width: 200px;
   max-height: 2200px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 400px;
+  }
 `;
 
 export const ComicInfo = styled.div`
@@ -29,16 +47,40 @@ export const ComicInfo = styled.div`
   h3 {
     font-size: 1.5rem;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+    }
   }
 
   .meta {
     font-size: 0.9rem;
     color: #888;
+
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.7rem;
+    }
   }
 
   p {
     font-size: 1rem;
     color: #666;
     margin-top: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 `;

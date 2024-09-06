@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding: 80px 40px;
   align-items: center;
   background-color: #f5f5f5;
+  min-height: calc(100vh - 88px);
 
   @media (max-width: 1024px) {
     gap: 80px;
@@ -14,6 +15,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
+    min-height: calc(100vh - 104px);
     gap: 60px;
     padding: 40px 20px;
   }

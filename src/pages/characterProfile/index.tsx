@@ -7,6 +7,7 @@ import { useCharacterStore } from "@store/characters";
 
 import { getComicsByCharacter } from "@services/characters";
 
+import { Loading } from "@components/loading";
 import { HeroBanner, CharacterCard, ComicCard } from "./components";
 import { ComicsContainer } from "./styles";
 
@@ -42,15 +43,19 @@ const CharacterProfile: IComponent = ({
       />
 
       <ComicsContainer>
-        {comics.map((comic) => (
-          <ComicCard
-            title={comic.title}
-            description={comic.description}
-            date={comic.dates[0].date}
-            imageUrl={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-            pages={comic.pageCount}
-          />
-        ))}
+        {comics.length > 0 ? (
+          comics.map((comic) => (
+            <ComicCard
+              title={comic.title}
+              description={comic.description}
+              date={comic.dates[0].date}
+              imageUrl={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+              pages={comic.pageCount}
+            />
+          ))
+        ) : (
+          <Loading />
+        )}
       </ComicsContainer>
     </div>
   );

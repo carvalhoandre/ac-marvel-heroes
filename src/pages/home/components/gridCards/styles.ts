@@ -58,17 +58,6 @@ export const Label = styled.p<LabelProps>`
   }
 `;
 
-export const EmptyLabel = styled.p<LabelProps>`
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-align: center;
-  color: #21212199;
-
-  @media (min-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
 export const Icon = styled.img`
   width: 1.25rem;
   height: 1.25rem;
