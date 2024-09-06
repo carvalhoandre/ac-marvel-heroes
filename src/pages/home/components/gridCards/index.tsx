@@ -49,6 +49,9 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
     ? currentFavorites
     : characters;
 
+  console.log(favoritesCharacters);
+  const hasFavorites = favoritesCharacters.length > 0;
+
   const fetchCharacters = async (page: number, searchQuery = "") => {
     if (showFavorites) return;
 
@@ -89,6 +92,8 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
   };
 
   const handleToggleFavorites = () => {
+    if (!hasFavorites) return;
+
     toggleFavorites();
 
     if (!showFavorites && characters.length === 0) {
@@ -107,15 +112,13 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
           } heróis`}
         </Label>
 
-        {favoritesCharacters.length > 0 && (
-          <BoxFavorite onClick={handleToggleFavorites}>
-            <Icon
-              src={showFavorites ? FavoriteIcon : FavoriteOutlinedIcon}
-              alt="ícone favorito"
-            />
-            <Label isFavorite>Somente favoritos</Label>
-          </BoxFavorite>
-        )}
+        <BoxFavorite onClick={handleToggleFavorites} isDisabled={!hasFavorites}>
+          <Icon
+            src={showFavorites ? FavoriteIcon : FavoriteOutlinedIcon}
+            alt="ícone favorito"
+          />
+          <Label isFavorite>Somente favoritos</Label>
+        </BoxFavorite>
       </BoxLine>
 
       {currentCharacters.length > 0 ? (

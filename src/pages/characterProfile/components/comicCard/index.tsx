@@ -14,6 +14,11 @@ const ComicCard: IComponent<IComicCard> = ({
   description,
   pages,
 }) => {
+  const descriptionValidated =
+    description.length > 0
+      ? truncateString(description, 200)
+      : "Sem descrição disponível";
+
   return (
     <ComicCardContainer data-testid={`${testId}-container`}>
       <ComicImage src={imageUrl} alt={title} data-testid={`${testId}-image`} />
@@ -27,9 +32,7 @@ const ComicCard: IComponent<IComicCard> = ({
           </div>
         </div>
 
-        <p data-testid={`${testId}-description`}>
-          {truncateString(description, 200)}
-        </p>
+        <p data-testid={`${testId}-description`}>{descriptionValidated}</p>
       </ComicInfo>
     </ComicCardContainer>
   );
