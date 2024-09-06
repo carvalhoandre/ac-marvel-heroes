@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeroBannerContainer = styled.div`
-  background-image: url("src/assets/background.svg");
+  background-image: url("https://raw.githubusercontent.com/carvalhoandre/marvel_heroes/f49e8a650e12c7477ada21bfe5770ce47b386692/src/assets/background.svg");
   background-size: cover;
   background-position: center;
   height: 400px;
