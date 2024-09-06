@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { LabelProps } from "./types";
+import styled, { css } from "styled-components";
+import { LabelProps, BoxFavoriteProps } from "./types";
 
 export const Container = styled.div`
   display: flex;
@@ -26,18 +26,27 @@ export const BoxLine = styled.div`
   }
 `;
 
-export const BoxFavorite = styled.div`
+export const BoxFavorite = styled.div<BoxFavoriteProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 20px;
   max-width: 275px;
 
-  cursor: pointer;
+  cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
 
   &:hover {
-    transform: scale(1.1);
+    transform: ${({ isDisabled }) =>
+      isDisabled ? "scale(1.0)" : "scale(1.1)"};
   }
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      & > * {
+        opacity: 0.5;
+      }
+    `}
 `;
 
 export const Grid = styled.div`
