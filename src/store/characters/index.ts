@@ -9,6 +9,7 @@ export const useCharacterStore = create<CharacterState>((set) => ({
   search: "",
   showFavorites: false,
   itemsPerPage: 8,
+  selectedCharacter: null,
 
   setCharacters: async (characters, totalCharacters) => {
     set({
@@ -27,4 +28,5 @@ export const useCharacterStore = create<CharacterState>((set) => ({
     })),
 
   setCurrentPage: (page) => set({ currentPage: page }),
+  setselectedCharacter: (selectedCharacter) => set({ selectedCharacter }),
 }));

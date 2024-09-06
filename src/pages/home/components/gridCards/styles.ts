@@ -34,6 +34,10 @@ export const BoxFavorite = styled.div`
   max-width: 275px;
 
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Grid = styled.div`
@@ -55,17 +59,6 @@ export const Label = styled.p<LabelProps>`
 
   @media (min-width: 768px) {
     font-size: 1.5rem;
-  }
-`;
-
-export const EmptyLabel = styled.p<LabelProps>`
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-align: center;
-  color: #21212199;
-
-  @media (min-width: 768px) {
-    font-size: 2rem;
   }
 `;
 
