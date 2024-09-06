@@ -92,6 +92,7 @@ export const Icon = styled.img`
   height: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  z-index: 99;
 
   &:hover {
     transform: scale(1.2);
