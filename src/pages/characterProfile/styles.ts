@@ -24,3 +24,30 @@ export const ComicsContainer = styled.div`
     min-height: calc(100vh - 500px);
   }
 `;
+
+export const Container = styled.div`
+  position: relative;
+`;
+
+export const LeftIcon = styled.img`
+  position: absolute;
+  cursor: pointer;
+
+  width: 2rem;
+  height: 2rem;
+
+  top: 24px;
+  left: 24px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    top: 12px;
+    left: 12px;
+  }
+`;

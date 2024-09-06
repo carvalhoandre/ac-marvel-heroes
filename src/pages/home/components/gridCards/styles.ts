@@ -34,6 +34,10 @@ export const BoxFavorite = styled.div`
   max-width: 275px;
 
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Grid = styled.div`

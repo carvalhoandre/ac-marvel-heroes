@@ -7,14 +7,17 @@ import { useCharacterStore } from "@store/characters";
 
 import { getComicsByCharacter } from "@services/characters";
 
+import ArrowLeft from "@assets/icons/left-arrow.svg";
+
 import { Loading } from "@components/loading";
+
 import { HeroBanner, CharacterCard, ComicCard } from "./components";
-import { ComicsContainer } from "./styles";
+import { ComicsContainer, Container, LeftIcon } from "./styles";
 
 const CharacterProfile: IComponent = ({
   testId = "character-profile-page",
 }) => {
-  const { selectedCharacter } = useCharacterStore();
+  const { selectedCharacter, setselectedCharacter } = useCharacterStore();
 
   const [comics, setComics] = useState<Array<Comic>>([]);
 
@@ -33,7 +36,14 @@ const CharacterProfile: IComponent = ({
   }, []);
 
   return (
-    <div data-testid={`${testId}-container`}>
+    <Container data-testid={`${testId}-container`}>
+      <LeftIcon
+        src={ArrowLeft}
+        data-testid={`${testId}-image`}
+        alt="arrow left"
+        onClick={() => setselectedCharacter(null)}
+      />
+
       <HeroBanner />
 
       <CharacterCard
@@ -57,7 +67,7 @@ const CharacterProfile: IComponent = ({
           <Loading />
         )}
       </ComicsContainer>
-    </div>
+    </Container>
   );
 };
 

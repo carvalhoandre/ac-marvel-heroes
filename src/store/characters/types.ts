@@ -16,5 +16,5 @@ export interface CharacterState {
   setSearch: (search: string) => void;
   toggleFavorites: () => void;
   setCurrentPage: (page: number) => void;
-  setselectedCharacter: (character: MarvelCharacter) => void;
+  setselectedCharacter: (character: MarvelCharacter | null) => void;
 }
