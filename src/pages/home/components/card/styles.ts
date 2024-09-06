@@ -10,6 +10,11 @@ export const Container = styled.div`
   gap: 10px;
   width: 100%;
   height: 100%;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Image = styled.img`
@@ -87,6 +92,7 @@ export const Icon = styled.img`
   height: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  z-index: 99;
 
   &:hover {
     transform: scale(1.2);

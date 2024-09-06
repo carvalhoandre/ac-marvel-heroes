@@ -7,6 +7,7 @@ export interface CharacterState {
   search: string;
   showFavorites: boolean;
   itemsPerPage: number;
+  selectedCharacter: MarvelCharacter | null;
 
   setCharacters: (
     characters: Array<MarvelCharacter>,
@@ -15,4 +16,5 @@ export interface CharacterState {
   setSearch: (search: string) => void;
   toggleFavorites: () => void;
   setCurrentPage: (page: number) => void;
+  setselectedCharacter: (character: MarvelCharacter | null) => void;
 }

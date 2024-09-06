@@ -1,3 +1,4 @@
+import { Comic } from "src/@types/comics";
 import { MarvelCharacter } from "src/@types/character";
 
 export interface IResponseData<Data> {
@@ -12,4 +13,12 @@ export interface GetAllCharactersResponse {
   total: number;
   count: number;
   results: Array<MarvelCharacter>;
+}
+
+export interface GetComicsByCharacterResponse {
+  count: number;
+  limit: number;
+  offset: number;
+  results: Array<Comic>;
+  total: number;
 }

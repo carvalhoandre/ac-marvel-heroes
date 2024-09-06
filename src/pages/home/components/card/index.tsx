@@ -21,6 +21,7 @@ const Card: IComponent<ICard> = ({
   character,
   isFavorite,
   onClick,
+  onFavoriteClick,
 }) => {
   const [isImageBroken, setIsImageBroken] = useState(false);
 
@@ -28,8 +29,16 @@ const Card: IComponent<ICard> = ({
 
   const handleError = () => setIsImageBroken(true);
 
+  const handleFavoriteClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
+    onFavoriteClick(character);
+  };
+
   return (
-    <Container data-testid={`${testId}-container`}>
+    <Container
+      data-testid={`${testId}-container`}
+      onClick={() => onClick(character)}
+    >
       {!isImageBroken ? (
         <Image
           src={thumbnail}
@@ -47,7 +56,7 @@ const Card: IComponent<ICard> = ({
         <Title data-testid={`${testId}-title`}>{character.name}</Title>
 
         <Icon
-          onClick={() => onClick(character)}
+          onClick={handleFavoriteClick}
           data-testid={`${testId}-icon`}
           src={isFavorite ? FavoriteIcon : FavoriteOutlinedIcon}
           alt="ícone favorito"
