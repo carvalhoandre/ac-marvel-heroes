@@ -1,18 +1,15 @@
-import IComponent from "src/@types";
+import React from "react";
 
-import { FooterContainer, Typography, Inline } from "./styles";
+import * as styles from "./styles";
 
-const Footer: IComponent = ({ testId = "footer-component" }) => {
+export const Footer: React.FC = () => {
   return (
-    <FooterContainer data-testid={`${testId}-container`}>
-      <Typography>Data provided by Marvel. © 2024 MARVEL</Typography>
-
-      <Inline>
-        <Typography>Desenvolvido por</Typography>
-        <Typography color="#999999">André Carvalho</Typography>
-      </Inline>
-    </FooterContainer>
+    <styles.Footer>
+      <styles.Content>
+        <styles.Typography>
+          &#169; André Carvalho. All rigths reserved
+        </styles.Typography>
+      </styles.Content>
+    </styles.Footer>
   );
 };
-
-export { Footer };
