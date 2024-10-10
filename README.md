@@ -1,4 +1,4 @@
-# InstaCarro Frontend Challenge
+# AC Marvel Heroes
 
 Este projeto é uma aplicação web que consome a API da Marvel para exibir personagens, quadrinhos e outros dados relevantes sobre o universo Marvel. Ele utiliza tecnologias modernas como React, Vite e Zustand para gerenciamento de estado e performance.
 
