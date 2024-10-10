@@ -13,7 +13,7 @@ Este projeto é uma aplicação web que consome a API da Marvel para exibir pers
 [![Netlify Status](https://api.netlify.com/api/v1/badges/81adf5ff-79a7-4646-ae66-8da459152bd9/deploy-status)](https://app.netlify.com/sites/ac-marvel-heroes/deploys)
 
 Você pode acessar o site de demonstração do projeto clicando no link abaixo:
-[Site de Demonstração]([https://github.com/carvalhoandre/marvel_heroes](https://ac-marvel-heroes.netlify.app/))
+[Site de Demonstração](https://ac-marvel-heroes.netlify.app/)
 
 ## Requisitos
 
