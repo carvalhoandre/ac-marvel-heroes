@@ -10,10 +10,10 @@ Este projeto é uma aplicação web que consome a API da Marvel para exibir pers
 - **Styled-components**: Para estilização dinâmica dos componentes React.
 
 ## Demonstração
-[![Netlify Status](https://api.netlify.com/api/v1/badges/908f1436-eeef-47b6-bfbf-e2c82ac437b2/deploy-status)](https://app.netlify.com/sites/instacarrochallenge/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/81adf5ff-79a7-4646-ae66-8da459152bd9/deploy-status)](https://app.netlify.com/sites/ac-marvel-heroes/deploys)
 
 Você pode acessar o site de demonstração do projeto clicando no link abaixo:
-[Site de Demonstração](https://github.com/carvalhoandre/marvel_heroes)
+[Site de Demonstração]([https://github.com/carvalhoandre/marvel_heroes](https://ac-marvel-heroes.netlify.app/))
 
 ## Requisitos
 
