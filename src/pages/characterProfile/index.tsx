@@ -1,51 +1,82 @@
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom"; // Import necessary hooks
 
 import IComponent from "src/@types";
 import { Comic } from "src/@types/comics";
 
 import { useCharacterStore } from "@store/characters";
 
-import { getComicsByCharacter } from "@services/characters";
+import { getComicsByCharacter, getCharacterById } from "@services/characters";
 
 import ArrowLeft from "@assets/icons/left-arrow.svg";
-
 import { Loading } from "@components/loading";
 
 import { HeroBanner, CharacterCard, ComicCard } from "./components";
 import { ComicsContainer, Container, LeftIcon } from "./styles";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 const CharacterProfile: IComponent = ({
   testId = "character-profile-page",
 }) => {
+  const { heroId } = useParams<{ heroId: string }>();
+  const navigate = useNavigate();
+
   const { selectedCharacter, setselectedCharacter } = useCharacterStore();
 
   const [comics, setComics] = useState<Array<Comic>>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!selectedCharacter) return <></>;
+  const fetchCharacterAndComics = async (id: number) => {
+    try {
+      setLoading(true);
+      setError(null);
 
-  const imageUrl = `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`;
+      if (!selectedCharacter) {
+        const characterResponse = await getCharacterById(id);
+        setselectedCharacter(characterResponse.data.results[0]);
+      }
 
-  const handleFetchComics = async () => {
-    const newComicsResponse = await getComicsByCharacter(selectedCharacter.id);
-
-    setComics(newComicsResponse.data.results);
+      const comicsResponse = await getComicsByCharacter(id);
+      setComics(comicsResponse.data.results);
+    } catch (err) {
+      console.error("Failed to fetch character or comics:", err);
+      setError("Failed to load character or comics.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    handleFetchComics();
-  }, []);
+    if (heroId) {
+      fetchCharacterAndComics(parseInt(heroId));
+    }
+  }, [heroId]);
+
+  if (loading) return <Loading />;
+
+  if (error) return <p>{error}</p>;
+
+  if (!selectedCharacter) return <p>Character not found</p>;
+
+  const imageUrl = `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`;
 
   return (
     <Container data-testid={`${testId}-container`}>
+      <Header />
+
       <LeftIcon
         src={ArrowLeft}
-        data-testid={`${testId}-image`}
+        data-testid={`${testId}-back-icon`}
         alt="arrow left"
-        onClick={() => setselectedCharacter(null)}
+        onClick={() => {
+          setselectedCharacter(null);
+          navigate("/");
+        }}
       />
 
       <HeroBanner />
-
       <CharacterCard
         name={selectedCharacter.name}
         description={selectedCharacter.description}
@@ -56,6 +87,7 @@ const CharacterProfile: IComponent = ({
         {comics.length > 0 ? (
           comics.map((comic) => (
             <ComicCard
+              key={comic.id}
               title={comic.title}
               description={comic.description}
               date={comic.dates[0].date}
@@ -64,9 +96,13 @@ const CharacterProfile: IComponent = ({
             />
           ))
         ) : (
-          <Loading />
+          <p>
+            Não há histórias em quadrinhos disponíveis para este personagem.
+          </p>
         )}
       </ComicsContainer>
+
+      <Footer />
     </Container>
   );
 };

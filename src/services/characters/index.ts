@@ -48,3 +48,18 @@ export const getComicsByCharacter = async (
     throw error;
   }
 };
+
+export const getCharacterById = async (
+  characterId: number
+): Promise<IResponseData<GetAllCharactersResponse>> => {
+  try {
+    const response = await PortalApi.get(`/characters/${characterId}`);
+
+    if (response.status !== 200) throw new Error(response.statusText);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching characters:", error);
+    throw error;
+  }
+};

@@ -1,3 +1,3 @@
-export { Header } from "./header";
+export { Emphasys } from "./emphasys";
 export { Search } from "./search";
 export { GridCards } from "./gridCards";

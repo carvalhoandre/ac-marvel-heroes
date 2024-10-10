@@ -36,7 +36,7 @@ export const LeftIcon = styled.img`
   width: 2rem;
   height: 2rem;
 
-  top: 24px;
+  top: 124px;
   left: 24px;
 
   &:hover {

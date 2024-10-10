@@ -2,7 +2,7 @@ import IComponent from "src/@types";
 
 import { Title, SubTitle, Container } from "./styles";
 
-const Header: IComponent = ({ testId = "header-component" }) => {
+const Emphasys: IComponent = ({ testId = "emphasys-component" }) => {
   return (
     <Container data-testid={`${testId}-container`}>
       <Title data-testid={`${testId}-title`}>
@@ -17,4 +17,4 @@ const Header: IComponent = ({ testId = "header-component" }) => {
   );
 };
 
-export { Header };
+export { Emphasys };

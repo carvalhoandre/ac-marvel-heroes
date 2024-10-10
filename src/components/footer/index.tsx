@@ -2,7 +2,7 @@ import React from "react";
 
 import * as styles from "./styles";
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   return (
     <styles.Footer>
       <styles.Content>
@@ -13,3 +13,5 @@ export const Footer: React.FC = () => {
     </styles.Footer>
   );
 };
+
+export { Footer };
