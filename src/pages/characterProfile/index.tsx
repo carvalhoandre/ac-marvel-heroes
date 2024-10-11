@@ -84,7 +84,7 @@ const CharacterProfile: IComponent = ({
       />
 
       <ComicsContainer>
-        {comics.length > 0 ? (
+        {comics?.length > 0 ? (
           comics.map((comic) => (
             <ComicCard
               key={comic.id}

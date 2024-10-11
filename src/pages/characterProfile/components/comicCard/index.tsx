@@ -15,7 +15,7 @@ const ComicCard: IComponent<IComicCard> = ({
   pages,
 }) => {
   const descriptionValidated =
-    description.length > 0
+    description?.length > 0
       ? truncateString(description, 200)
       : "Sem descrição disponível";
 
