@@ -17,4 +17,4 @@ const Home: IComponent = ({ testId = "home-page" }) => {
   );
 };
 
-export { Home };
+export default Home;

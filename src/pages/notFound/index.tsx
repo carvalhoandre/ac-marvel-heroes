@@ -20,4 +20,4 @@ const NotFound: IComponent = () => {
   );
 };
 
-export { NotFound };
+export default NotFound;

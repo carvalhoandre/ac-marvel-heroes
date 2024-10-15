@@ -1,27 +1,46 @@
-import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import {
+  BrowserRouter,
+  Route,
+  Routes as BrowserRouterRoutes,
+} from "react-router-dom";
 
+import { Lazy } from "@components/lazy";
 import { Loading } from "@components/loading";
+import { ErrorBoundary } from "@components/errorBoundary";
 
-import { Home } from "@pages/home";
-import { CharacterProfile } from "@pages/characterProfile";
-import { NotFound } from "@pages/notFound";
+const Home = lazy(() => import("@pages/home"));
+const CharacterProfile = lazy(() => import("@pages/characterProfile"));
+const NotFound = lazy(() => import("@pages/notFound"));
 
 const handleLoader = () => {
-  return <Loading />;
+  return <Loading isFullScreen />;
 };
 
 const Routes = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="" element={<Home />} loader={handleLoader} />
-        <Route
-          path="/hero/:heroId"
-          element={<CharacterProfile />}
-          loader={handleLoader}
-        />
-        <Route path="*" element={<NotFound />} loader={handleLoader} />
-      </Switch>
+      <Suspense fallback={handleLoader()}>
+        <ErrorBoundary>
+          <BrowserRouterRoutes>
+            <Route
+              path=""
+              element={<Lazy component={Home} />}
+              loader={handleLoader}
+            />
+            <Route
+              path="/hero/:heroId"
+              element={<Lazy component={CharacterProfile} />}
+              loader={handleLoader}
+            />
+            <Route
+              path="*"
+              element={<Lazy component={NotFound} />}
+              loader={handleLoader}
+            />
+          </BrowserRouterRoutes>
+        </ErrorBoundary>
+      </Suspense>
     </BrowserRouter>
   );
 };

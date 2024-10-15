@@ -106,6 +106,8 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
     }
   }, [currentPage, search, showFavorites]);
 
+  if (currentCharacters?.length === 0) return <Loading />;
+
   return (
     <Container data-testid={`${testId}-container`}>
       <Search onSearch={handleSearchChange} testId={`${testId}-search-input`} />
@@ -124,36 +126,30 @@ const GridCards: IComponent = ({ testId = "grid-cards-component" }) => {
         </BoxFavorite>
       </BoxLine>
 
-      {currentCharacters.length > 0 ? (
-        <>
-          <Grid>
-            {currentCharacters.map((character) => {
-              const isFavorite = favoritesCharacters.some(
-                (favorite) => favorite.id === character.id
-              );
+      <Grid>
+        {currentCharacters.map((character) => {
+          const isFavorite = favoritesCharacters.some(
+            (favorite) => favorite.id === character.id
+          );
 
-              return (
-                <Card
-                  key={character.id}
-                  character={character}
-                  isFavorite={isFavorite}
-                  onClick={() => handleSelectedCharacter(character)}
-                  onFavoriteClick={() => handleToggleFavorite(character)}
-                />
-              );
-            })}
-          </Grid>
-
-          {!showFavorites && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={Math.ceil(totalCharacters / itemsPerPage)}
-              handlePageChange={handlePageChange}
+          return (
+            <Card
+              key={character.id}
+              character={character}
+              isFavorite={isFavorite}
+              onClick={() => handleSelectedCharacter(character)}
+              onFavoriteClick={() => handleToggleFavorite(character)}
             />
-          )}
-        </>
-      ) : (
-        <Loading />
+          );
+        })}
+      </Grid>
+
+      {!showFavorites && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(totalCharacters / itemsPerPage)}
+          handlePageChange={handlePageChange}
+        />
       )}
     </Container>
   );

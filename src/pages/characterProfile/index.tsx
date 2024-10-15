@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import necessary hooks
+import { useParams, useNavigate } from "react-router-dom";
 
 import IComponent from "src/@types";
 import { Comic } from "src/@types/comics";
@@ -107,4 +107,4 @@ const CharacterProfile: IComponent = ({
   );
 };
 
-export { CharacterProfile };
+export default CharacterProfile;
