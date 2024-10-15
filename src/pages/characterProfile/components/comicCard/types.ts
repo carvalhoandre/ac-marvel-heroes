@@ -4,4 +4,5 @@ export interface IComicCard {
   imageUrl: string;
   description: string;
   pages: number;
+  loading?: "lazy" | "eager";
 }

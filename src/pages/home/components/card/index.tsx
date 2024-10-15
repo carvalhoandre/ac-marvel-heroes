@@ -14,12 +14,14 @@ import {
   BoxLine,
   Icon,
   FallbackImage,
+  IconWrapper,
 } from "./styles";
 
 const Card: IComponent<ICard> = ({
   testId = "card-component",
   character,
   isFavorite,
+  loading = "eager",
   onClick,
   onFavoriteClick,
 }) => {
@@ -45,6 +47,7 @@ const Card: IComponent<ICard> = ({
           data-testid={`${testId}-image`}
           alt={`imagem ilustrativa do ${character.name}`}
           onError={handleError}
+          loading={loading}
         />
       ) : (
         <FallbackImage data-testid={`${testId}-fallback-image`}>
@@ -55,12 +58,17 @@ const Card: IComponent<ICard> = ({
       <BoxLine>
         <Title data-testid={`${testId}-title`}>{character.name}</Title>
 
-        <Icon
+        <IconWrapper
           onClick={handleFavoriteClick}
-          data-testid={`${testId}-icon`}
-          src={isFavorite ? FavoriteIcon : FavoriteOutlinedIcon}
-          alt="ícone favorito"
-        />
+          data-testid={`${testId}-icon-wrapper`}
+        >
+          <Icon
+            data-testid={`${testId}-icon`}
+            src={isFavorite ? FavoriteIcon : FavoriteOutlinedIcon}
+            alt="ícone favorito"
+            loading="lazy"
+          />
+        </IconWrapper>
       </BoxLine>
 
       <Paragraph data-testid={`${testId}-paragraph`}>

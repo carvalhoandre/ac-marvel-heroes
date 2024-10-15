@@ -7,13 +7,15 @@ import { Container } from "./styles";
 
 const Home: IComponent = ({ testId = "home-page" }) => {
   return (
-    <Container data-testid={`${testId}-container`}>
+    <>
       <Header />
 
-      <Emphasys />
+      <Container data-testid={`${testId}-container`}>
+        <Emphasys />
 
-      <GridCards />
-    </Container>
+        <GridCards />
+      </Container>
+    </>
   );
 };
 

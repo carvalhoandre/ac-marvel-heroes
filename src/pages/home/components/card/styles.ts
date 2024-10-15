@@ -109,3 +109,10 @@ export const Icon = styled.img`
     height: 1.5rem;
   }
 `;
+
+export const IconWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+`;

@@ -13,6 +13,7 @@ const ComicCard: IComponent<IComicCard> = ({
   imageUrl,
   description,
   pages,
+  loading = "eager",
 }) => {
   const descriptionValidated =
     description?.length > 0
@@ -21,7 +22,12 @@ const ComicCard: IComponent<IComicCard> = ({
 
   return (
     <ComicCardContainer data-testid={`${testId}-container`}>
-      <ComicImage src={imageUrl} alt={title} data-testid={`${testId}-image`} />
+      <ComicImage
+        src={imageUrl}
+        alt={title}
+        data-testid={`${testId}-image`}
+        loading={loading}
+      />
 
       <ComicInfo data-testid={`${testId}-info`}>
         <div>

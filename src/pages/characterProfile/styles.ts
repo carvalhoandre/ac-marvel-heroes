@@ -47,7 +47,7 @@ export const LeftIcon = styled.img`
     width: 1.5rem;
     height: 1.5rem;
 
-    top: 12px;
-    left: 12px;
+    top: 130px;
+    left: 6px;
   }
 `;

@@ -9,12 +9,13 @@ import { useCharacterStore } from "@store/characters";
 import { getComicsByCharacter, getCharacterById } from "@services/characters";
 
 import ArrowLeft from "@assets/icons/left-arrow.svg";
+
 import { Loading } from "@components/loading";
+import { Header } from "@components/header";
+import { Footer } from "@components/footer";
 
 import { HeroBanner, CharacterCard, ComicCard } from "./components";
 import { ComicsContainer, Container, LeftIcon } from "./styles";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 
 const CharacterProfile: IComponent = ({
   testId = "character-profile-page",
@@ -54,13 +55,13 @@ const CharacterProfile: IComponent = ({
     }
   }, [heroId]);
 
-  if (loading) return <Loading />;
-
   if (error) return <p>{error}</p>;
 
   if (!selectedCharacter) return <p>Character not found</p>;
 
   const imageUrl = `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`;
+
+  if (loading) return <Loading isFullScreen />;
 
   return (
     <Container data-testid={`${testId}-container`}>
@@ -74,9 +75,11 @@ const CharacterProfile: IComponent = ({
           setselectedCharacter(null);
           navigate("/");
         }}
+        loading="lazy"
       />
 
       <HeroBanner />
+
       <CharacterCard
         name={selectedCharacter.name}
         description={selectedCharacter.description}
@@ -93,6 +96,7 @@ const CharacterProfile: IComponent = ({
               date={comic.dates[0].date}
               imageUrl={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
               pages={comic.pageCount}
+              loading="lazy"
             />
           ))
         ) : (
