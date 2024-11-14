@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const Typography = styled.p`
+  font-size: 1.3rem;
+  text-align: center;
+  color: #212121;
+`;
 export const ComicsContainer = styled.div`
   display: flex;
   background-color: #f5f5f5;

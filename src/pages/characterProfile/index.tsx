@@ -15,7 +15,7 @@ import { Header } from "@components/header";
 import { Footer } from "@components/footer";
 
 import { HeroBanner, CharacterCard, ComicCard } from "./components";
-import { ComicsContainer, Container, LeftIcon } from "./styles";
+import { ComicsContainer, Container, LeftIcon, Typography } from "./styles";
 
 const CharacterProfile: IComponent = ({
   testId = "character-profile-page",
@@ -100,9 +100,9 @@ const CharacterProfile: IComponent = ({
             />
           ))
         ) : (
-          <p>
+          <Typography>
             Não há histórias em quadrinhos disponíveis para este personagem.
-          </p>
+          </Typography>
         )}
       </ComicsContainer>
 

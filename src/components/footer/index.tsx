@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
     <styles.Footer>
       <styles.Content>
         <styles.Typography>
-          &#169; André Carvalho. All rigths reserved
+          &#169; André Leite Carvalho. All rigths reserved
         </styles.Typography>
       </styles.Content>
     </styles.Footer>
