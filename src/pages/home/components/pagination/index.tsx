@@ -1,13 +1,15 @@
 import IComponent from "src/@types";
+import { IPage } from "./types";
 
+import LeftArrowIcon from "@assets/icons/left-arrow.svg";
+import RightArrowIcon from "@assets/icons/right-arrow.svg";
+
+import { Image } from "@/components/image";
 import {
   PaginationButton,
   PaginationWrapper,
   PaginationArrowButton,
 } from "./styles";
-import { IPage } from "./types";
-import LeftArrowIcon from "@assets/icons/left-arrow.svg";
-import RightArrowIcon from "@assets/icons/right-arrow.svg";
 
 const Pagination: IComponent<IPage> = ({
   testId = "pagination-component",
@@ -57,7 +59,7 @@ const Pagination: IComponent<IPage> = ({
         disabled={currentPage === 1}
         data-testid={`${testId}-prev-button`}
       >
-        <img src={LeftArrowIcon} alt="página anterior" />
+        <Image src={LeftArrowIcon} alt="página anterior" />
       </PaginationArrowButton>
 
       {pagesToShow.map((page, index) => (
@@ -80,7 +82,7 @@ const Pagination: IComponent<IPage> = ({
         disabled={currentPage === totalPages}
         data-testid={`${testId}-next-button`}
       >
-        <img src={RightArrowIcon} alt="próxima página" />
+        <Image src={RightArrowIcon} alt="próxima página" />
       </PaginationArrowButton>
     </PaginationWrapper>
   );

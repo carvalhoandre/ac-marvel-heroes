@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Image } from "@components/image";
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,10 +19,12 @@ export const Container = styled.div`
   }
 `;
 
-export const Image = styled.img`
+export const ImageCard = styled(Image)`
   width: 100%;
   height: auto;
   border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 
   @media (min-width: 768px) {
     height: 250px;

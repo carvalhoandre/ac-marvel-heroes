@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Image } from "@/components/image";
+
 export const CharacterCardContainer = styled.div`
   display: flex;
   gap: 70px;
@@ -32,7 +34,7 @@ export const CharacterCardContainer = styled.div`
   }
 `;
 
-export const CharacterImage = styled.img`
+export const CharacterImage = styled(Image)`
   border-radius: 50%;
   width: 150px;
   height: 150px;

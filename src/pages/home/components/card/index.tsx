@@ -10,7 +10,7 @@ import {
   Title,
   Paragraph,
   Container,
-  Image,
+  ImageCard,
   BoxLine,
   Icon,
   FallbackImage,
@@ -21,15 +21,12 @@ const Card: IComponent<ICard> = ({
   testId = "card-component",
   character,
   isFavorite,
-  loading = "eager",
   onClick,
   onFavoriteClick,
 }) => {
-  const [isImageBroken, setIsImageBroken] = useState(false);
+  const [isImageBroken] = useState(false);
 
   const thumbnail = `${character.thumbnail.path}.${character.thumbnail.extension}`;
-
-  const handleError = () => setIsImageBroken(true);
 
   const handleFavoriteClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
@@ -42,12 +39,10 @@ const Card: IComponent<ICard> = ({
       onClick={() => onClick(character)}
     >
       {!isImageBroken ? (
-        <Image
+        <ImageCard
           src={thumbnail}
           data-testid={`${testId}-image`}
           alt={`imagem ilustrativa do ${character.name}`}
-          onError={handleError}
-          loading={loading}
         />
       ) : (
         <FallbackImage data-testid={`${testId}-fallback-image`}>
